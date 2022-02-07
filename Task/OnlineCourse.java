@@ -11,6 +11,28 @@ public class OnlineCourse {
     String name, id, teacher;
     int duration;
 
+    public OnlineCourse(){
+        name = id = teacher = "";
+        duration = 0;
+    }
+    
+    public OnlineCourse(String name, String id, String teacher, int duration){
+        if(checkName(name)){
+            this.name = name;
+        }
+        
+        if(checkTeacher(teacher)){
+            this.teacher = teacher;
+        }
+        
+        if(checkId(id)){
+            this.id = id;
+        }
+        
+        if(checkDuration(duration)){
+            this.duration = duration;
+        }
+        
     public void checkName(String name) {
         if (name.length() > 4) {
             this.name = name;
