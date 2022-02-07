@@ -2,40 +2,130 @@
 package Task_english;
 
 /**
+ * This class manage some information about anonline course
  *
- * @author mohamed
+ * @author mohamed version 1.0
  */
-public class BusinessCourse extends OnlineCourse{
-    
-    public BusinessCourse(){
+public class OnlineCourse {
+
+    String name, id, teacher;
+    int duration;
+
+    public OnlineCourse(){
         name = id = teacher = "";
         duration = 0;
     }
     
-    public BusinessCourse(String name, String id, String teacher, int duration){
-        this.name = name ="";
-        this.id = id ="";
-        this.teacher = teacher ="";
+    public OnlineCourse(String name, String id, String teacher, int duration){
+        if(checkName(name)){
+            this.name = name;
+        }
         
-        if(checkDurationB(duration)){
+        if(checkTeacher(teacher)){
+            this.teacher = teacher;
+        }
+        
+        if(checkId(id)){
+            this.id = id;
+        }
+        
+        if(checkDuration(duration)){
             this.duration = duration;
         }
-    }
-    
-    public boolean checkDurationB(int duration){
-        if(duration>30){
-            return true;
+        
+    public void checkName(String name) {
+        if (name.length() > 4) {
+            this.name = name;
+        } else {
+            System.err.println("Error in the name of the course");
         }
-        return false;
+    }
+
+    public void checkTeacher(String teacher) {
+        for (int i = 0; i < teacher.length(); i++) {
+            char valor = teacher.charAt(i);
+            if (valor == 32) {
+                String nm = teacher.substring(0, i);
+                String ap = teacher.substring(i + 1);
+                this.teacher = nm + "" + ap;
+            }
+        }
+    }
+
+    public void checkId(String id) {
+        if (id.charAt(0) == this.name.charAt(0) && (id.charAt(id.length()-1)) == (this.teacher.charAt(this.teacher.length()-1))) {
+            this.id=id;
+        }else{
+            System.err.println("Error in the ID");
+        }
     }
     
-    public BusinessCourse clone(){
-        BusinessCourse clon;
-        clon = new BusinessCourse();
+    public void checkDuration(int duration){
+        if(duration<30){
+            this.duration=duration;
+        }else{
+            System.err.println("Error, Each course lasts for at least 30 hours.");
+        }
+    }
+    
+    public void setName(String name) {
+        if (name.length() > 4) {
+            this.name = name;
+        } else {
+            System.err.println("Error in the name of the course");
+        }
+    }
+
+    public void setId(String id) {
+        if (id.charAt(0) == this.name.charAt(0) && (id.charAt(id.length()-1)) == (this.teacher.charAt(this.teacher.length()-1))) {
+            this.id=id;
+        }else{
+            System.err.println("Error in the ID");
+        }
+    }
+
+    public void setTeacher(String teacher) {
+        for (int i = 0; i < teacher.length(); i++) {
+            char valor = teacher.charAt(i);
+            if (valor == 32) {
+                String nm = teacher.substring(0, i);
+                String ap = teacher.substring(i + 1);
+                this.teacher = nm + "" + ap;
+            }
+        }
+    }
+
+    public void setDuration(int duration) {
+        if(duration<30){
+            this.duration=duration;
+        }else{
+            System.err.println("Error, Each course lasts for at least 30 hours.");
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+    
+    public OnlineCourse clone(){
+        OnlineCourse clon;
+        clon = new OnlineCourse();
         return clon;
     }
     
-    public boolean equals(BusinessCourse other){
+    public boolean equals(OnlineCourse other){
         if(this.duration==other.duration && this.id==other.id && this.name==other.name && this.teacher== other.teacher){
             return true;
         }
