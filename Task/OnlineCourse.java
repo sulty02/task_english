@@ -11,12 +11,12 @@ public class OnlineCourse {
     String name, id, teacher;
     int duration;
 
-    public OnlineCourse(){
+     public OnlineCourse(){
         name = id = teacher = "";
         duration = 0;
     }
     
-    public OnlineCourse(String name, String id, String teacher, int duration){
+    public OnlineCourse(String name, String id, String teacher, String duration){
         if(checkName(name)){
             this.name = name;
         }
@@ -29,19 +29,29 @@ public class OnlineCourse {
             this.id = id;
         }
         
-        if(checkDuration(duration)){
-            this.duration = duration;
+        int dur = Integer.parseInt(duration);
+        if (checkDuration(dur)) {
+            this.duration = dur *= 15;
         }
-        
-    public void checkName(String name) {
+    }
+    
+    public OnlineCourse(OnlineCourse other){
+        this.duration = other.duration;
+        this.id = other.id;
+        this.name = other.name;
+        this.teacher = other.teacher;
+    }
+    
+    public boolean checkName(String name) {
         if (name.length() > 4) {
             this.name = name;
         } else {
             System.err.println("Error in the name of the course");
         }
+        return false;
     }
 
-    public void checkTeacher(String teacher) {
+    public boolean checkTeacher(String teacher) {
         for (int i = 0; i < teacher.length(); i++) {
             char valor = teacher.charAt(i);
             if (valor == 32) {
@@ -50,30 +60,35 @@ public class OnlineCourse {
                 this.teacher = nm + "" + ap;
             }
         }
+        return false;
     }
 
-    public void checkId(String id) {
+    public boolean checkId(String id) {
         if (id.charAt(0) == this.name.charAt(0) && (id.charAt(id.length()-1)) == (this.teacher.charAt(this.teacher.length()-1))) {
             this.id=id;
         }else{
             System.err.println("Error in the ID");
+            
         }
+        return false;
     }
     
-    public void checkDuration(int duration){
+    public boolean checkDuration(int duration){
         if(duration<30){
             this.duration=duration;
         }else{
             System.err.println("Error, Each course lasts for at least 30 hours.");
         }
+        return false;
     }
     
-    public void setName(String name) {
+    public boolean setName(String name) {
         if (name.length() > 4) {
             this.name = name;
         } else {
             System.err.println("Error in the name of the course");
         }
+        return false;
     }
 
     public void setId(String id) {
@@ -121,7 +136,7 @@ public class OnlineCourse {
     
     public OnlineCourse clone(){
         OnlineCourse clon;
-        clon = new OnlineCourse();
+        clon = new OnlineCourse(this);
         return clon;
     }
     
