@@ -1,3 +1,5 @@
+package Github;
+
 /**
  *
  * @author JulioCabeza
@@ -37,13 +39,5 @@ public class AdminCourse extends OnlineCourse {
             return true;
         }
         return false;
-    }
-    
-    public void setDocuments(String [] documents){
-        this.documents=documents;
-    }
-    
-    public String getDocuments(){
-        return this.documents;
     }
 }
